@@ -92,5 +92,13 @@ namespace BMSReceiver.Test
             MeasureResult _result = Program.GetMeasureResult(SOCReadings, new StateOfCharge());
             Assert.IsNotNull(_result);
         }
+        
+        [TestMethod]
+        public void GivenRawInputReadings_ThenReturnBatteryMeasureObject()
+        {
+            ProcessInputReadings process = new ProcessInputReadings();
+            string inputReading = "BatteryData\n{\n\ttemperature:40,\tsoc:35,}";
+            Assert.IsNotNull(process.ProcessRawBatteryMeasureReadings(inputReading));
+        }
     }
 }
