@@ -20,19 +20,20 @@ namespace BMSReceiver
             {
                 _measureList.Add(_process.ProcessRawBatteryMeasureReadings(getData));
                 readingsCount++;
+                
+                //Setting static limit, since sender keep on sending without stopping streaming battery parameters
+                if(readingsCount == 20) 
+                    break;
             }
+            
+            List<Double> TemperatureList = _measureList.Select(list => list.Temperature).ToList();
+            List<Double> StateOfChargeList = _measureList.Select(list => list.StateOfCharge).ToList();
 
-            if (readingsCount > 15)
-            {
-                List<Double> TemperatureList = _measureList.Select(list => list.Temperature).ToList();
-                List<Double> StateOfChargeList = _measureList.Select(list => list.StateOfCharge).ToList();
+            MeasureResult TemperatureResult = GetMeasureResult(TemperatureList, new Temperature());
+            PrintResult(TemperatureResult, new Temperature());
 
-                MeasureResult TemperatureResult = GetMeasureResult(TemperatureList, new Temperature());
-                PrintResult(TemperatureResult, new Temperature());
-
-                MeasureResult SOCResult = GetMeasureResult(StateOfChargeList, new StateOfCharge());
-                PrintResult(SOCResult, new StateOfCharge());
-            }
+            MeasureResult SOCResult = GetMeasureResult(StateOfChargeList, new StateOfCharge());
+            PrintResult(SOCResult, new StateOfCharge());          
         }
 
         public static MeasureResult GetMeasureResult(List<Double> _measureReadings, IBMSOperations _measureClass)
