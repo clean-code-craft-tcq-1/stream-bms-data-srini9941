@@ -26,12 +26,5 @@ namespace BMSReceiver
             return Temperature.Average();
             
         }
-
-        public void PrintOperationResult(MeasureResult result)
-        {
-            Console.WriteLine("Maximum Temperature: " + result.Maximum);
-            Console.WriteLine("Minimum Temperature: " + result.Minimum);
-            Console.WriteLine("Simple Moving Average of Temperature: " + result.MovingAverage);
-        }
     }
 }
