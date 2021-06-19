@@ -28,12 +28,13 @@ namespace BMSReceiver
             
             List<Double> TemperatureList = _measureList.Select(list => list.Temperature).ToList();
             List<Double> StateOfChargeList = _measureList.Select(list => list.StateOfCharge).ToList();
+            ConsoleLogger logger = new ConsoleLogger();
 
             MeasureResult TemperatureResult = GetMeasureResult(TemperatureList, new Temperature());
-            PrintResult(TemperatureResult, new Temperature());
+            logger.PrintBMSOperationResult(TemperatureResult, "Temperature");
 
             MeasureResult SOCResult = GetMeasureResult(StateOfChargeList, new StateOfCharge());
-            PrintResult(SOCResult, new StateOfCharge());          
+            logger.PrintBMSOperationResult(SOCResult, "State of Charge");       
         }
 
         public static MeasureResult GetMeasureResult(List<Double> _measureReadings, IBMSOperations _measureClass)
@@ -47,11 +48,5 @@ namespace BMSReceiver
             }
             return _result;
         }
-
-        public static void PrintResult(MeasureResult _result, IBMSOperations _measureClass)
-        {
-            _measureClass.PrintOperationResult(_result);
-        }
-
     }
 }
