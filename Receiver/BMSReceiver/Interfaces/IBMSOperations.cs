@@ -11,6 +11,5 @@ namespace BMSReceiver.Interfaces
         double FindMaximum(List<double> measures);
         double FindMinimum(List<double> measures);
         double FindSimpleMovingAverage(List<double> measures);
-        void PrintOperationResult(MeasureResult result);
     }
 }
