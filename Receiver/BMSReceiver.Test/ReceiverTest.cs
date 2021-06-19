@@ -100,5 +100,14 @@ namespace BMSReceiver.Test
             string inputReading = "BatteryData\n{\n\ttemperature:40,\tsoc:35,}";
             Assert.IsNotNull(process.ProcessRawBatteryMeasureReadings(inputReading));
         }
+        
+        [TestMethod]
+        public void GivenResultObject_ThenPrintFunctionCalledAtleastOnce_MustBeTrue()
+        {
+            FakeConsoleLogger logger = new FakeConsoleLogger();
+            MeasureResult result = new MeasureResult();
+            logger.PrintBMSOperationResult(result, "BatteryParameter");
+            Assert.IsTrue(logger.isPrintFunctionCalledAtleastOnce);
+        }
     }
 }
