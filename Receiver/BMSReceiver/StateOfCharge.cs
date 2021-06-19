@@ -24,12 +24,5 @@ namespace BMSReceiver
             SOC.Reverse();
             return SOC.Take(5).ToList().Average();
         }
-
-        public void PrintOperationResult(MeasureResult result)
-        {
-            Console.WriteLine("Maximum State of Charge: " + result.Maximum);
-            Console.WriteLine("Minimum State of Charge: " + result.Minimum);
-            Console.WriteLine("Simple Moving Average of SOC: " + result.MovingAverage);
-        }
     }
 }
